@@ -185,3 +185,26 @@ class YouTubeAPI:
         seconds = int(match.group(3) or 0)
 
         return hours * 3600 + minutes * 60 + seconds
+    
+    def get_channel_name(self, url: str) -> str:
+        """
+        채널 URL 또는 사용자명으로부터 채널 이름(제목) 얻기
+        """
+        channel_id = self.extract_channel_id(url)
+        if not channel_id:
+            return "UnknownChannel"
+        
+        try:
+            request = self.youtube.channels().list(
+                part="snippet",
+                id=channel_id
+            )
+            response = request.execute()
+            items = response.get("items", [])
+            if items:
+                return items[0]["snippet"]["title"]
+        except Exception as e:
+            logger.error(f"채널 이름 조회 중 오류: {e}")
+        
+        return "UnknownChannel"
+
