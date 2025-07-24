@@ -25,7 +25,7 @@ load_dotenv()
 # 프로젝트 모듈들
 import config
 from youtube_api import YouTubeAPI
-from downloader import Downloader
+from downloader import VideoDownloader as Downloader
 from file_manager import FileManager
 from subtitle_extractor import SubtitleExtractor
 from image_processor import ImageProcessor
@@ -127,7 +127,7 @@ def main():
         # 각 컴포넌트 초기화
         logger.info("컴포넌트 초기화 중...")
         youtube_api = YouTubeAPI()
-        downloader = Downloader()
+        downloader = Downloader(config.BASE_DOWNLOAD_PATH)
         file_manager = FileManager()
         subtitle_extractor = SubtitleExtractor()
         image_processor = ImageProcessor()
