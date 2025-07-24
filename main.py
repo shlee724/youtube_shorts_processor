@@ -136,7 +136,13 @@ def main():
         logger.info(f"📺 채널 분석 중: {channel_url}")
         print(f"\n🔍 {channel_url} 채널의 쇼츠 영상을 검색 중...")
 
-        videos_info = youtube_api.get_shorts_videos(channel_url, cutoff_date)
+        channel_id = youtube_api.extract_channel_id(channel_url)
+        if channel_id is None:
+            print("❌ 유효한 채널 ID를 가져오지 못했습니다. URL을 다시 확인하세요.")
+            return
+
+        videos_info = youtube_api.get_shorts_videos(channel_id, cutoff_date)
+
 
         if not videos_info:
             print("❌ 해당 기간에 쇼츠 영상을 찾을 수 없습니다.")
