@@ -117,3 +117,27 @@ class FileManager:
                         logger.info(f"임시 파일 삭제: {temp_file}")
         except Exception as e:
             logger.error(f"임시 파일 정리 중 오류: {e}")
+    
+    def organize_video_file(self, file_path: str, video_title: str) -> str:
+        """
+        다운로드된 영상을 개별 폴더로 이동 및 정리하는 메서드
+        - file_path : 기존 영상 파일 경로
+        - video_title : 영상 제목 (새 폴더명)
+        반환값 : 정리된 영상 파일 경로
+        """
+        import os
+        import shutil
+
+        # 디렉토리 및 새 경로 생성
+        directory = os.path.dirname(file_path)
+        new_folder = os.path.join(directory, video_title)
+        os.makedirs(new_folder, exist_ok=True)
+
+        # 새 파일 경로 설정
+        filename = os.path.basename(file_path)
+        new_path = os.path.join(new_folder, filename)
+
+        # 파일 이동
+        shutil.move(file_path, new_path)
+
+        return new_path

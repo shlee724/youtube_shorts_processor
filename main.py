@@ -160,9 +160,10 @@ def main():
 
         for i, video_info in enumerate(videos_info, 1):
             print(f"  📥 [{i}/{len(videos_info)}] {video_info['title'][:50]}...")
+            channel_path = os.path.join(config.BASE_DOWNLOAD_PATH, channel_name)
 
             try:
-                video_path = downloader.download_video(video_info, channel_name)
+                video_path = downloader.download_single_video(video_info, channel_path)
                 if video_path:
                     downloaded_videos.append({
                         'info': video_info,

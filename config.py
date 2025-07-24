@@ -48,6 +48,8 @@ INVALID_FILENAME_CHARS = ['<', '>', ':', '"', '/', '\\', '|', '?', '*']
 # Windows 경로 길이 제한
 MAX_PATH_LENGTH = 260
 
+FORBIDDEN_CHARS = '<>:"/\\|?*'
+
 # 누락된 변수 추가
 MAX_RESULTS_PER_REQUEST = 50  # YouTube Data API max: 보통 50이 최대
 API_REQUEST_DELAY = 1.0       # 초 단위, 1.0초로 설정(필요에 따라 조정)
