@@ -220,7 +220,7 @@ def main():
 
         for video_data in organized_videos:
             try:
-                result_path = image_processor.combine_images(video_data['path'])
+                result_path = image_processor.combine_images(os.path.dirname(video_data['path']))
                 if result_path:
                     image_completed += 1
                     logger.info(f"이미지 합성 완료: {video_data['info']['title']}")
