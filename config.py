@@ -42,13 +42,14 @@ API_REQUEST_DELAY = 0.1
 # 최대 재시도 횟수
 MAX_RETRY_ATTEMPTS = 3
 
-# 파일명에서 제거할 특수문자
+# 파일명에서 제거할 특수문자 (Windows 금지 문자 + 추가 문제 문자)
 INVALID_FILENAME_CHARS = ['<', '>', ':', '"', '/', '\\', '|', '?', '*']
 
 # Windows 경로 길이 제한
 MAX_PATH_LENGTH = 260
 
-FORBIDDEN_CHARS = '<>:"/\\|?*'
+# Windows에서 금지된 문자 + 추가 문제가 될 수 있는 문자들
+FORBIDDEN_CHARS = '<>:"/\\|?*\'\n\r\t'
 
 # 누락된 변수 추가
 MAX_RESULTS_PER_REQUEST = 50  # YouTube Data API max: 보통 50이 최대
