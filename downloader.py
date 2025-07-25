@@ -26,26 +26,6 @@ class VideoDownloader:
             os.makedirs(self.download_path, exist_ok=True)
             logger.info(f"다운로드 경로 생성: {self.download_path}")
 
-    def download_videos(self, videos: List[Dict], channel_name: str) -> List[Dict]:
-        """영상 목록 다운로드"""
-        successful_downloads = []
-
-        channel_path = os.path.join(self.download_path, self.sanitize_filename(channel_name))
-        if not os.path.exists(channel_path):
-            os.makedirs(channel_path, exist_ok=True)
-
-        for video in videos:
-            try:
-                result = self.download_single_video(video, channel_path)
-                if result:
-                    successful_downloads.append(result)
-            except Exception as e:
-                logger.error(f"영상 다운로드 실패 - {video.get('title', 'Unknown')}: {e}")
-                continue
-
-        logger.info(f"총 {len(successful_downloads)}개 영상 다운로드 완료")
-        return successful_downloads
-
     def download_single_video(self, video: Dict, channel_path: str) -> Dict:
         """단일 영상 다운로드"""
         video_title = self.sanitize_filename(video['title'])
